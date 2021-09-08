@@ -21,6 +21,7 @@ var SEUIL = 0.0;
 var COUCHE1 = [0.067, 0.133, 0.933,1.0];
 var COUCHE2 = [1.0, 1.0, 0.0,1.0];
 var COUCHE3 = [1.0, 0.0, 0.0,1.0];
+var COUCHE4 = [0.0, 1.0, 0.2,1.0];
 var trueColor = false;
 var CONTOUR = false;
 
@@ -202,6 +203,7 @@ function initShaders(vShaderTxt,fShaderTxt) { // doit lire les 2 fich sur disque
 	shaderProgram.uCouche1 = gl.getUniformLocation(shaderProgram, "uCouche1"); //
 	shaderProgram.uCouche2 = gl.getUniformLocation(shaderProgram, "uCouche2"); //
 	shaderProgram.uCouche3 = gl.getUniformLocation(shaderProgram, "uCouche3"); //
+	shaderProgram.uCouche4 = gl.getUniformLocation(shaderProgram, "uCouche4"); //
 	shaderProgram.fakeColor = gl.getUniformLocation(shaderProgram, "trueColor"); //
 	shaderProgram.contour = gl.getUniformLocation(shaderProgram, "contour"); //
 
@@ -227,6 +229,7 @@ function setUniforms(zValue, aValue) {
 		gl.uniform4fv(shaderProgram.uCouche1, COUCHE1);
 		gl.uniform4fv(shaderProgram.uCouche2, COUCHE2);
 		gl.uniform4fv(shaderProgram.uCouche3, COUCHE3);
+		gl.uniform4fv(shaderProgram.uCouche4, COUCHE4);
 		gl.uniform1f(shaderProgram.fakeColor, trueColor);
 		gl.uniform1f(shaderProgram.contour, CONTOUR);
 	}
@@ -252,7 +255,7 @@ function drawScene() {
 		}
 		else {
 			for(i=0; i<360-(TRANCHE*(360/100)); i++) {
-				setUniforms(-0.2+i*(0.5/360.0), ALPHA);
+				setUniforms(-0.1+i*(0.5/360.0), ALPHA);
 				gl.bindTexture(gl.TEXTURE_2D, texImages[i]);
 				gl.drawElements(gl.TRIANGLE_FAN, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);				
 				}		

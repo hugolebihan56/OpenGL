@@ -11,6 +11,7 @@ uniform float uSeuil;
 uniform vec4 uCouche1;
 uniform vec4 uCouche2;
 uniform vec4 uCouche3;
+uniform vec4 uCouche4;
 
 uniform bool trueColor;
 uniform bool contour;
@@ -31,10 +32,13 @@ void main(void) {
 			if (texCol.r < 0.008 ){
 				gl_FragColor = vec4(texCol.rgb,0.0);// Supprime les pixels noirs + bruits
 			}
-			else if (texCol.r < 0.5 ){
+			else if (texCol.r < 0.25 ){
 				gl_FragColor = vec4(uCouche1.rgba);
 			}
-			else if (texCol.r > 0.5 && texCol.r < 0.6){
+			else if (texCol.r < 0.5 &&  texCol.r > 0.25){
+				gl_FragColor = vec4(uCouche4.rgba);
+			}
+			else if (texCol.r > 0.5 && texCol.r < 0.7){
 				gl_FragColor = vec4(uCouche2.rgba);
 			}
 			else {

@@ -1,8 +1,11 @@
 var colorWell;
 var colorWell2;
+var colorWell3;
+var colorWell4;
 var defaultColor = "#0317fc";
 var defaultColor2 = "#f7d600";
 var defaultColor3 = "#ff1938";
+var defaultColor4 = "#20fc03";
 window.addEventListener("load", startup, false);
 
 //FONCTION CONTOUR //////////////////////////////////////////////////
@@ -40,10 +43,15 @@ function startup() {
   colorWell2.addEventListener("change", updateCouche2, false);
   colorWell2.select();
 
-  colorWell2 = document.querySelector("#colorWell3");
-  colorWell2.value = defaultColor3;
-  colorWell2.addEventListener("change", updateCouche3, false);
-  colorWell2.select();
+  colorWell3 = document.querySelector("#colorWell3");
+  colorWell3.value = defaultColor3;
+  colorWell3.addEventListener("change", updateCouche3, false);
+  colorWell3.select();
+
+  colorWell4 = document.querySelector("#colorWell4");
+  colorWell4.value = defaultColor4;
+  colorWell4.addEventListener("change", updateCouche4, false);
+  colorWell4.select();
 }
 
 function updateAll(event) {  
@@ -66,6 +74,14 @@ function updateCouche3(event) {
     COUCHE3[1] = parseFloat((res_COUCHE3.g/255).toFixed(3));
     COUCHE3[2] = parseFloat((res_COUCHE3.b/255).toFixed(3)); 
 }
+
+function updateCouche4(event) {  
+    res_COUCHE4 = hexToRgb(event.target.value);   
+    COUCHE4[0] = parseFloat((res_COUCHE4.r/255).toFixed(3));
+    COUCHE4[1] = parseFloat((res_COUCHE4.g/255).toFixed(3));
+    COUCHE4[2] = parseFloat((res_COUCHE4.b/255).toFixed(3)); 
+}
+
 
 function hexToRgb(hex) {
   	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -114,6 +130,20 @@ $( function() {
 		slide: function( event, ui ) {
 			handle.text( ui.value/100 );
 				COUCHE3[3] = 1-(ui.value/100);					
+		}
+	});
+});
+
+//FONCTION TRANSPARENCE COUHE 3 //////////////////////////////////////////////////
+$( function() {
+	var handle = $( "#custom-handle7" );
+	$( "#slider7" ).slider( {
+		create: function() {
+			handle.text( $( this ).slider( "value" ) );
+		},
+		slide: function( event, ui ) {
+			handle.text( ui.value/100 );
+				COUCHE4[3] = 1-(ui.value/100);					
 		}
 	});
 });
